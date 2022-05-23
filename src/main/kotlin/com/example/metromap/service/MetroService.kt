@@ -13,11 +13,11 @@ class MetroService(
 
     fun getEdges() = edgeClient.getEdgesArray()
 
-    fun shortestPath(from: String, to: String): Array<String> {
-        val start: Int = stationClient.getStation(from).id
-        val finish: Int = stationClient.getStation(to).id
-        val dist = floyd.dist
-        val pathInt = floyd.shortest(start, finish)
+    fun shortestPath(from: String, to: String, city: String): Array<String> {
+        val start: Int = stationClient.getStation(from, city).id
+        val finish: Int = stationClient.getStation(to, city).id
+        val dist = floyd.distMap[city]!!
+        val pathInt = floyd.shortest(start, finish, city)
         val n = pathInt.size
         val pathString: ArrayList<String> = ArrayList()
         val pathColor: ArrayList<Int> = ArrayList()
@@ -42,10 +42,10 @@ class MetroService(
                 i++
             }
             if (pathString[i - 1] != pathString[curr]) {
-                var s ="станций"
-                if(i-1-curr ==1)
-                    s="станцию"
-                if(i-1-curr in 2..4)
+                var s = "станций"
+                if (i - 1 - curr == 1)
+                    s = "станцию"
+                if (i - 1 - curr in 2..4)
                     s = "станции"
                 pS.add("ехать ${i - curr - 1} $s в течение ${dist[pathInt[i - 1]][pathInt[curr]]} минут до станции")
                 pS.add(pathString[i - 1])
@@ -59,11 +59,11 @@ class MetroService(
                 curr = i
             }
         }
-        var s="минут"
+        var s = "минут"
         val time = dist[start][finish]
-        if( time % 10 == 1 && time != 11)
+        if (time % 10 == 1 && time != 11)
             s = "минута"
-        if(time % 10 in 2..4 && time !in 12..14)
+        if (time % 10 in 2..4 && time !in 12..14)
             s = "минуты"
         pS.add(0, "Общее время поездки: ${dist[start][finish]} $s")
         pS.add(1, "Маршрут:")

@@ -11,17 +11,17 @@ data class Edge (
     @Column(name="id")
     var id: Int,
 
-    @Column(name = "u")
-    var u:Int,
-//    @ManyToOne
-//    @JoinColumn(name= "u")
-//    var u : Station,
+//    @Column(name = "u")
+//    var u:Int,
+    @ManyToOne
+    @JoinColumn(name= "u")
+    var u : Station,
 
-    @Column(name = "v")
-    var v:Int,
-//    @ManyToOne
-//    @JoinColumn(name="v")
-//    var v : Station,
+//    @Column(name = "v")
+//    var v:Int,
+    @ManyToOne
+    @JoinColumn(name="v")
+    var v : Station,
 
     @Column(name = "weight")
     var weight : Int

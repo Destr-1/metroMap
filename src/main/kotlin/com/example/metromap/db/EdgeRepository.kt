@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param
 interface EdgeRepository : CrudRepository<Edge, Long> {
     override fun findAll(): ArrayList<Edge>
 
-//    @Modifying
-//    @Query("from Edge e where e.u.city = :city and e.v.city = :city")
-//    fun findAllByCity(@Param("city") city: String)
+    @Modifying
+    @Query("from Edge e where e.u.city = :city and e.v.city = :city")
+    fun findAllByCity(@Param("city") city: String): ArrayList<Edge>
 }

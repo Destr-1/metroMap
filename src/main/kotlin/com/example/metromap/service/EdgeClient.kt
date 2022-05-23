@@ -10,17 +10,18 @@ class EdgeClient(private val repository: EdgeRepository) {
     val inf = 1000000
 
     fun getEdgesArray(): ArrayList<Edge> = repository.findAll()
+    fun getEdgesArrayByCity(city:String) : ArrayList<Edge> = repository.findAllByCity(city)
 
-    fun getMatrix(): Array<IntArray> {
-        val edgesList = getEdgesArray()
+    fun getMatrix(city:String): Array<IntArray> {
+        val edgesList = getEdgesArrayByCity(city)
         var n = 0
         for (edge in edgesList) {
-            n = max(n, max(edge.u, edge.v))
+            n = max(n, max(edge.u.id, edge.v.id))
         }
         val a: Array<IntArray> = Array(n + 1, { IntArray(n + 1, { inf }) })
         for (edge in edgesList) {
-            val u = edge.u
-            val v = edge.v
+            val u = edge.u.id
+            val v = edge.v.id
             val w = edge.weight
             a[v][u] = w
             a[u][v] = w

@@ -3,14 +3,25 @@ package com.example.metromap.service
 import org.springframework.stereotype.Component
 
 @Component
-class Floyd(client: EdgeClient) : Shortest {
-    final val a = client.getMatrix()
-    final val n = a.size
-    val prev: Array<IntArray> = Array(n, { IntArray(n, { -1 }) })
-    var dist = a
+class Floyd(client: EdgeClient, cityClient: CityClient) : Shortest {
+    private final val d = cityClient.getCities().map{it.city}
+    private final val a = d.associateWith { client.getMatrix(it) }
+
+    //        client.getMatrix()
+    private final val n = a.size
+    var prev: Array<IntArray> = Array(n, { IntArray(n, { -1 }) })
+    val prevMap : MutableMap<String, Array<IntArray>> = mutableMapOf()
+    var distMap = a.toMutableMap()
+    var dist : Array<IntArray> = Array(n) { IntArray(n) }
 
     init {
-        floyd()
+        for(item in a.keys){
+            dist = distMap[item]!!
+            prev = Array(n, { IntArray(n, { -1 }) })
+            floyd()
+            distMap[item] = dist
+            prevMap[item] = prev
+        }
     }
 
     //    companion object
@@ -35,9 +46,10 @@ class Floyd(client: EdgeClient) : Shortest {
     }
 
 
-    override fun shortest(start: Int, finish: Int): IntArray {
+    override fun shortest(start: Int, finish: Int, city: String): IntArray {
         val path: ArrayList<Int> = arrayListOf()
         var curr = finish
+        val prev = prevMap[city]!!
         while (curr != start) {
             path.add(curr)
             curr = prev[start][curr]

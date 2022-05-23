@@ -1,10 +1,7 @@
 package com.example.metromap.api
 
 import com.example.metromap.service.MetroService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/metro")
@@ -16,9 +13,16 @@ class MetroController(private val service: MetroService) {
     @GetMapping("edges")
     fun getEdges() = service.getEdges()
 
-    @GetMapping("path")
-    fun shortestPath(
-        @RequestParam from : String,
-        @RequestParam to : String
-    ) = service.shortestPath(from, to)
+//    @GetMapping("path")
+//    fun shortestPath(
+//        @RequestParam from : String,
+//        @RequestParam to : String
+//    ) = service.shortestPath(from, to)
+
+//    @GetMapping("{city}")
+//    fun setCity(@PathVariable city:String) = service.setCity(city)
+
+    @GetMapping("/{city}")
+    fun getInfo(@PathVariable("city") city: String, @RequestParam("from") from: String, @RequestParam("to") to : String) : Array<String> =
+        service.shortestPath(from, to, city)
 }

@@ -8,5 +8,5 @@ interface StationRepository :CrudRepository<Station, Long> {
 
     fun findById(id:Int):Station
 
-    fun findByStation(station:String):Station
+    fun findByStationAndCity(station:String, city:String):Station
 }
