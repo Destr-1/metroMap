@@ -34,6 +34,25 @@
         </sql>
     </changeSet>
 
+    <changeSet id="makeCities" author="Dmitry">
+        <sql>
+            CREATE TABLE Cities
+            (
+                id     INT PRIMARY KEY NOT NULL,
+                city   VARCHAR(30)        NOT NULL,
+                unique(city)
+            );
+            CREATE SEQUENCE CITY_SEQ INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="fillCities" author="Dmitry">
+        <sql>
+            insert into CITIES values(nextval('CITY_SEQ'), 'СПб');
+            insert into CITIES values(nextval('CITY_SEQ'), 'НН')
+        </sql>
+    </changeSet>
+
     <changeSet id="fillStations" author="Dmitry">
         <sql>
             insert into STATIONS values (nextval('STATION_SEQ'), 'Девяткино', 1, 'СПб');
@@ -112,6 +131,23 @@
             insert into STATIONS values (nextval('STATION_SEQ'), 'Проспект Славы', 5, 'СПб');
             insert into STATIONS values (nextval('STATION_SEQ'), 'Дунайская', 5, 'СПб');
             insert into STATIONS values (nextval('STATION_SEQ'), 'Шушары', 5, 'СПб');
+
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Буревестник', 1, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Бурнаковская', 1, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Канавинская', 1, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'МосковскаяСин', 1, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Стрелка', 1, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Горьковская', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'МосковскаяКр', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Чкаловская', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Ленинская', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Заречная', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Двигатель Революции', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Пролетарская', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Автозаводская', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Комсомольская', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Кировская', 2, 'НН');
+            insert into STATIONS values (nextval('STATION_SEQ'), 'Парк культуры', 2, 'НН');
         </sql>
     </changeSet>
 
@@ -199,8 +235,23 @@
             insert into EDGES values (nextval('EDGE_SEQ'), 29 , 64 , 4 );
             insert into EDGES values (nextval('EDGE_SEQ'), 50 , 64 , 3 );
 
+            insert into EDGES values (nextval('EDGE_SEQ'), 73 , 74 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 74 , 75 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 75 , 76 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 76 , 77 , 2 );
 
+            insert into EDGES values (nextval('EDGE_SEQ'), 76 , 79 , 3 );
 
+            insert into EDGES values (nextval('EDGE_SEQ'), 78 , 79 , 4 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 79 , 80 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 80 , 81 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 81 , 82 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 82 , 83 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 83 , 84 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 84 , 85 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 85 , 86 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 86 , 87 , 2 );
+            insert into EDGES values (nextval('EDGE_SEQ'), 87 , 88 , 2 );
         </sql>
     </changeSet>
 
