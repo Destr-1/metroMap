@@ -8,14 +8,17 @@ class Floyd(client: EdgeClient, cityClient: CityClient) : Shortest {
     private final val a = d.associateWith { client.getMatrix(it) }
 
     //        client.getMatrix()
-    private final val n = a.size
-    var prev: Array<IntArray> = Array(n, { IntArray(n, { -1 }) })
+    private var n = a.size
+    var prev: Array<IntArray> = arrayOf()
+//        Array(n, { IntArray(n, { -1 }) })
     val prevMap : MutableMap<String, Array<IntArray>> = mutableMapOf()
     var distMap = a.toMutableMap()
-    var dist : Array<IntArray> = Array(n) { IntArray(n) }
+    var dist : Array<IntArray> = arrayOf()
+//        Array(n) { IntArray(n) }
 
     init {
         for(item in a.keys){
+            n= distMap[item]!!.size
             dist = distMap[item]!!
             prev = Array(n, { IntArray(n, { -1 }) })
             floyd()

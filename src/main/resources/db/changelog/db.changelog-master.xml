@@ -134,7 +134,12 @@
             insert into STATIONS values (next value for STATION_SEQ, 'Буревестник', 1, 'НН');
             insert into STATIONS values (next value for STATION_SEQ, 'Бурнаковская', 1, 'НН');
             insert into STATIONS values (next value for STATION_SEQ, 'Канавинская', 1, 'НН');
+            insert into STATIONS values (next value for STATION_SEQ, 'МосковскаяСин', 1, 'НН');
             insert into STATIONS values (next value for STATION_SEQ, 'Стрелка', 1, 'НН');
+            insert into STATIONS values (next value for STATION_SEQ, 'Горьковская', 2, 'НН');
+            insert into STATIONS values (next value for STATION_SEQ, 'МосковскаяКр', 2, 'НН');
+            insert into STATIONS values (next value for STATION_SEQ, 'Чкаловская', 2, 'НН');
+
         </sql>
     </changeSet>
 
@@ -221,6 +226,16 @@
             insert into EDGES values (next value for EDGE_SEQ, 29 , 50 , 4 );
             insert into EDGES values (next value for EDGE_SEQ, 29 , 64 , 4 );
             insert into EDGES values (next value for EDGE_SEQ, 50 , 64 , 3 );
+
+            insert into EDGES values (next value for EDGE_SEQ, 73 , 74 , 2 );
+            insert into EDGES values (next value for EDGE_SEQ, 74 , 75 , 2 );
+            insert into EDGES values (next value for EDGE_SEQ, 75 , 76 , 2 );
+            insert into EDGES values (next value for EDGE_SEQ, 76 , 77 , 2 );
+
+            insert into EDGES values (next value for EDGE_SEQ, 76 , 79 , 3 );
+
+            insert into EDGES values (next value for EDGE_SEQ, 78 , 79 , 4 );
+            insert into EDGES values (next value for EDGE_SEQ, 79 , 80 , 2 );
 
 
 

@@ -23,6 +23,9 @@ class MetroController(private val service: MetroService) {
 //    fun setCity(@PathVariable city:String) = service.setCity(city)
 
     @GetMapping("/{city}")
-    fun getInfo(@PathVariable("city") city: String, @RequestParam("from") from: String, @RequestParam("to") to : String) : Array<String> =
-        service.shortestPath(from, to, city)
+    fun getInfo(
+        @PathVariable("city") city: String,
+        @RequestParam("from") from: String,
+        @RequestParam("to") to: String
+    ): Array<String> = service.shortestPath(from, to, city)
 }
