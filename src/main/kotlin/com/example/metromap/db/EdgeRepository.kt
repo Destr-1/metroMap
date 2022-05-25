@@ -11,4 +11,6 @@ interface EdgeRepository : CrudRepository<Edge, Long> {
     @Modifying
     @Query("from Edge e where e.u.city = :city and e.v.city = :city")
     fun findAllByCity(@Param("city") city: String): ArrayList<Edge>
+
+    fun save(edge: Edge): Edge
 }

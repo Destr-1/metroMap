@@ -9,7 +9,9 @@ import java.lang.Integer.max
 class EdgeClient(private val repository: EdgeRepository) {
     val inf = 1000000
 
-    fun getEdgesArray(): ArrayList<Edge> = repository.findAll()
+    fun addEdge(edge:Edge) = repository.save(edge)
+
+    fun getEdges(): ArrayList<Edge> = repository.findAll()
     fun getEdgesArrayByCity(city:String) : ArrayList<Edge> = repository.findAllByCity(city)
 
     fun getMatrix(city:String): Array<IntArray> {

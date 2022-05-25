@@ -8,4 +8,6 @@ import org.springframework.stereotype.Component
 class CityClient(private val repository: CityRepository) {
 
     fun getCities() : ArrayList<City> = repository.findAll()
+
+    fun addCity(city: City) = repository.save(city)
 }

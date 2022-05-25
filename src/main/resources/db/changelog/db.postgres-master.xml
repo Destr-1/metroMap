@@ -6,6 +6,18 @@
         http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
+    <changeSet id="makeCities" author="Dmitry">
+        <sql>
+            CREATE TABLE Cities
+            (
+                id     INT PRIMARY KEY NOT NULL,
+                city   VARCHAR(30)        NOT NULL,
+                unique(city)
+            );
+            CREATE SEQUENCE CITY_SEQ INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
     <changeSet id="makeStations" author="Dmitry">
         <sql>
             CREATE TABLE Stations
@@ -13,7 +25,8 @@
                 id      INT PRIMARY KEY NOT NULL,
                 station VARCHAR(50)     NOT NULL,
                 color   INT             NOT NULL,
-                city    VARCHAR(30)     NOT NULL
+                city    VARCHAR(30)     NOT NULL REFERENCES Cities(city),
+                unique(station, color, city)
             );
             CREATE SEQUENCE STATION_SEQ INCREMENT BY 1;
         </sql>
@@ -34,17 +47,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="makeCities" author="Dmitry">
-        <sql>
-            CREATE TABLE Cities
-            (
-                id     INT PRIMARY KEY NOT NULL,
-                city   VARCHAR(30)        NOT NULL,
-                unique(city)
-            );
-            CREATE SEQUENCE CITY_SEQ INCREMENT BY 1;
-        </sql>
-    </changeSet>
+
 
     <changeSet id="fillCities" author="Dmitry">
         <sql>

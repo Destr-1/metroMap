@@ -3,9 +3,9 @@ package com.example.metromap.service
 import org.springframework.stereotype.Component
 
 @Component
-class Floyd(client: EdgeClient, cityClient: CityClient) : Shortest {
-    private final val d = cityClient.getCities().map{it.city}
-    private final val a = d.associateWith { client.getMatrix(it) }
+class Floyd(private var client: EdgeClient, private var cityClient: CityClient) : Shortest {
+    private var d = cityClient.getCities().map{it.city}
+    private var a = d.associateWith { client.getMatrix(it) }
 
     //        client.getMatrix()
     private var n = a.size
@@ -17,6 +17,24 @@ class Floyd(client: EdgeClient, cityClient: CityClient) : Shortest {
 //        Array(n) { IntArray(n) }
 
     init {
+        for(item in a.keys){
+            n= distMap[item]!!.size
+            dist = distMap[item]!!
+            prev = Array(n, { IntArray(n, { -1 }) })
+            floyd()
+            distMap[item] = dist
+            prevMap[item] = prev
+        }
+    }
+
+    fun update(){
+        d = cityClient.getCities().map{it.city}
+        a = d.associateWith { client.getMatrix(it) }
+        //n = a.size
+        //prev = Array(n, { IntArray(n, { -1 }) })
+        prevMap.clear()
+        distMap = a.toMutableMap()
+
         for(item in a.keys){
             n= distMap[item]!!.size
             dist = distMap[item]!!
@@ -60,5 +78,7 @@ class Floyd(client: EdgeClient, cityClient: CityClient) : Shortest {
         path.add(start)
         return path.reversed().toIntArray()
     }
+
+
 
 }
